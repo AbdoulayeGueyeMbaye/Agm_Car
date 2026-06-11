@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agm Car</title>
+    <link rel="stylesheet" href="output.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .fade-in { animation: fadeIn 0.4s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .sidebar-link:hover { background: rgba(37, 99, 235, 0.1); color: #2563eb; }
+        .sidebar-link.active { background: #2563eb; color: white; }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .stat-card { transition: all 0.3s ease; }
+        .stat-card:hover { transform: scale(1.02); }
+        .progress-bar { transition: width 0.6s ease; }
+    </style>
+<base target="_blank">
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+    
+    <div id="auth-page" class="min-h-screen flex items-center justify-center px-4">
+        <div class="bg-white max-w-6xl w-full mx-auto rounded-2xl shadow-2xl overflow-hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-2">
+
+                
+                <div class="p-8 lg:p-12">
+                    <div class="flex items-center gap-3 mb-8">
+                        <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-car text-white text-xl"></i>
+                        </div>
+                        <h1 class="text-2xl font-bold text-gray-800">Agm-Car</h1>
+                    </div>
+
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2" id="auth-title">Se connecter</h2>
+                    <p class="text-gray-500 mb-8">Gérez votre flotte automobile en toute simplicité</p>
+
+                    
+                    <form id="form-login" class="space-y-5">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <div class="relative">
+                                <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                <input type="email" id="login-email" 
+                                    class="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"
+                                    placeholder="Entrer votre email" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Mot de passe</label>
+                            <div class="relative">
+                                <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                <input type="password" id="login-password" 
+                                    class="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"
+                                    placeholder="Entrer votre mot de pass" required>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded">
+                                <span class="text-sm text-gray-600">Se souvenir de moi</span>
+                            </label>
+                            <a href="#" class="text-sm text-blue-600 hover:text-blue-700 font-medium">Mot de passe oublié ?</a>
+                        </div>
+                        <button type="submit" 
+                            class="w-full cursor-pointer bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                            Se Connecter
+                        </button>
+                    </form>
+
+                    
+                    <form id="form-register" class="space-y-4 hidden">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Nom</label>
+                                <input type="text" id="reg-nom" 
+                                    class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"
+                                    placeholder="Entrer votre nom" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Prénom</label>
+                                <input type="text" id="reg-prenom" 
+                                    class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"
+                                    placeholder="Entrer votre prénom" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <div class="relative">
+                                <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                <input type="email" id="reg-email" 
+                                    class="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"
+                                    placeholder="Entrer votre email" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Mot de passe</label>
+                            <div class="relative">
+                                <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                <input type="password" id="reg-password" 
+                                    class="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"
+                                    placeholder="Entrer votre mot de pass" minlength="5" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Confirmer le mot de passe</label>
+                            <div class="relative">
+                                <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                <input type="password" id="reg-password-confirm" 
+                                    class="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"
+                                    placeholder="Confirmer votre mot de pass" required>
+                            </div>
+                        </div>
+                        <button type="submit" 
+                            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 cursor-pointer">
+                            Créer mon compte
+                        </button>
+                    </form>
+
+                    <div class="mt-6 text-center">
+                        <p class="text-gray-600">
+                            <span id="toggle-text">Pas encore de compte ?</span>
+                            <button id="btn-toggle-auth" type="button" class="text-blue-600 hover:text-blue-700 font-semibold ml-1 cursor-pointer">
+                                S'inscrire
+                            </button>
+                        </p>
+                    </div>
+                </div>
+
+                
+                <div class="hidden lg:flex bg-blue-600  flex-col items-center justify-center p-12 text-white relative overflow-hidden">
+                    
+                    
+                    <div class="relative z-10 text-center">
+
+                                                <i class="fas fa-car-side text-8xl mb-6 opacity-90"></i>
+
+                        <h3 class="text-3xl font-bold mb-4">Agm-Car Dashboard</h3>
+                        <p class="text-blue-100 text-lg max-w-sm">Gérez, louez, achetez et entretenez votre flotte automobile en quelques clics.</p>
+                        <div class="mt-8 flex gap-4 justify-center">
+                            <div class="bg-white/10 backdrop-blur rounded-lg p-4 text-center">
+                                <div class="text-2xl font-bold">500+</div>
+                                <div class="text-sm text-blue-200">Véhicules</div>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur rounded-lg p-4 text-center">
+                                <div class="text-2xl font-bold">1.2k</div>
+                                <div class="text-sm text-blue-200">Clients</div>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur rounded-lg p-4 text-center">
+                                <div class="text-2xl font-bold">98%</div>
+                                <div class="text-sm text-blue-200">Satisfaction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div id="dashboard-page" class="hidden">
+       
+        <aside class="fixed left-0 top-0 h-full w-64 bg-white shadow-lg z-50">
+            <div class="p-6 border-b border-gray-100">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-car text-white"></i>
+                    </div>
+                    <span class="text-xl font-bold text-gray-800">Agm-Car</span>
+                </div>
+            </div>
+
+            <nav class="p-4 space-y-1">
+                <a href="#" class="sidebar-link active flex items-center gap-3 px-4 py-3 rounded-xl transition-all">
+                    <i class="fas fa-chart-pie w-5"></i>
+                    <span class="font-medium">Tableau de bord</span>
+                </a>
+                <a href="#" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 transition-all">
+                    <i class="fas fa-car w-5"></i>
+                    <span class="font-medium">Véhicules</span>
+                    <span class="ml-auto bg-blue-100 text-blue-600 text-xs font-bold px-2 py-1 rounded-full">24</span>
+                </a>
+                <a href="#" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 transition-all">
+                    <i class="fas fa-users w-5"></i>
+                    <span class="font-medium">Clients</span>
+                </a>
+                <a href="#" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 transition-all">
+                    <i class="fas fa-handshake w-5"></i>
+                    <span class="font-medium">Locations</span>
+                    <span class="ml-auto bg-green-100 text-green-600 text-xs font-bold px-2 py-1 rounded-full">8 actives</span>
+                </a>
+                <a href="#" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 transition-all">
+                    <i class="fas fa-wrench w-5"></i>
+                    <span class="font-medium">Entretien</span>
+                </a>
+                <a href="#" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 transition-all">
+                    <i class="fas fa-file-invoice-dollar w-5"></i>
+                    <span class="font-medium">Factures</span>
+                </a>
+            </nav>
+
+            <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-100">
+                <div class="flex items-center gap-3 px-4 py-3">
+                    <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user text-gray-500"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm font-medium text-gray-800 truncate" id="user-name">Utilisateur</p>
+                        <p class="text-xs text-gray-500 truncate" id="user-email">email@example.com</p>
+                    </div>
+                    <button id="btn-logout" class="text-gray-400 hover:text-red-500 transition-colors">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        
+        <main class="ml-64 min-h-screen">
+           
+            <header class="bg-white shadow-sm sticky top-0 z-40">
+                <div class="flex items-center justify-between px-8 py-4">
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-800">Tableau de bord</h1>
+                        <p class="text-sm text-gray-500">Bienvenue, voici un aperçu de votre activité</p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <button class="relative p-2 text-gray-400 hover:text-gray-600 transition-colors">
+                            <i class="fas fa-bell text-xl"></i>
+                            <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                        </button>
+                        <button class="p-2 text-gray-400 hover:text-gray-600 transition-colors">
+                            <i class="fas fa-cog text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+          
+            <div class="p-8">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="stat-card bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                                <i class="fas fa-car text-blue-600 text-xl"></i>
+                            </div>
+                            <span class="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded-full">+15%</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">24</h3>
+                        <p class="text-sm text-gray-500">Véhicules disponibles</p>
+                    </div>
+
+                    <div class="stat-card bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+                                <i class="fas fa-handshake text-green-600 text-xl"></i>
+                            </div>
+                            <span class="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded-full">+5%</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">8</h3>
+                        <p class="text-sm text-gray-500">Locations actives</p>
+                    </div>
+
+                    <div class="stat-card bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center">
+                                <i class="fas fa-wrench text-yellow-600 text-xl"></i>
+                            </div>
+                            <span class="text-xs font-medium text-red-600 bg-red-50 px-2 py-1 rounded-full">Urgent</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">3</h3>
+                        <p class="text-sm text-gray-500">Entretiens à venir</p>
+                    </div>
+
+                    <div class="stat-card bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
+                               
+                                <i class="fa-solid fa-franc-sign"></i>
+                            </div>
+                            <span class="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded-full">+18%</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">50 000 FCFA</h3>
+                        <p class="text-sm text-gray-500">Revenus ce mois</p>
+                    </div>
+                </div>
+
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                    
+                    <div class="lg:col-span-2 bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-lg font-bold text-gray-800">Revenus mensuels</h3>
+                            <select class="text-sm border border-gray-200 rounded-lg px-3 py-1.5 bg-gray-50">
+                                <option>2026</option>
+                                <option>2025</option>
+                            </select>
+                        </div>
+                        <div class="h-64 flex items-end justify-between gap-2 px-4">
+                            <div class="flex-1 flex flex-col items-center gap-2">
+                                <div class="w-full bg-blue-100 rounded-t-lg relative group" style="height: 40%">
+                                    <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">15 000 FCFA</div>
+                                </div>
+                                <span class="text-xs text-gray-500">Jan</span>
+                            </div>
+                            <div class="flex-1 flex flex-col items-center gap-2">
+                                <div class="w-full bg-blue-100 rounded-t-lg relative group" style="height: 55%">
+                                    <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">10 000 FCFA</div>
+                                </div>
+                                <span class="text-xs text-gray-500">Fév</span>
+                            </div>
+                            <div class="flex-1 flex flex-col items-center gap-2">
+                                <div class="w-full bg-blue-100 rounded-t-lg relative group" style="height: 45%">
+                                    <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">13 000 FCFA</div>
+                                </div>
+                                <span class="text-xs text-gray-500">Mar</span>
+                            </div>
+                            <div class="flex-1 flex flex-col items-center gap-2">
+                                <div class="w-full bg-blue-100 rounded-t-lg relative group" style="height: 70%">
+                                    <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">16 000 FCFA</div>
+                                </div>
+                                <span class="text-xs text-gray-500">Avr</span>
+                            </div>
+                            <div class="flex-1 flex flex-col items-center gap-2">
+                                <div class="w-full bg-blue-100 rounded-t-lg relative group" style="height: 60%">
+                                    <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">20 000 FCFA</div>
+                                </div>
+                                <span class="text-xs text-gray-500">Mai</span>
+                            </div>
+                            <div class="flex-1 flex flex-col items-center gap-2">
+                                <div class="w-full bg-blue-500 rounded-t-lg relative group" style="height: 85%">
+                                    <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">30 000 FCFA</div>
+                                </div>
+                                <span class="text-xs text-gray-500 font-semibold text-blue-600">Juin</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                        <h3 class="text-lg font-bold text-gray-800 mb-6">État du parc</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm text-gray-600">Disponibles</span>
+                                    <span class="text-sm font-bold text-green-600">16</span>
+                                </div>
+                                <div class="w-full bg-gray-100 rounded-full h-2.5">
+                                    <div class="progress-bar bg-green-500 h-2.5 rounded-full" style="width: 66%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm text-gray-600">En location</span>
+                                    <span class="text-sm font-bold text-blue-600">8</span>
+                                </div>
+                                <div class="w-full bg-gray-100 rounded-full h-2.5">
+                                    <div class="progress-bar bg-blue-500 h-2.5 rounded-full" style="width: 33%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm text-gray-600">En maintenance</span>
+                                    <span class="text-sm font-bold text-yellow-600">3</span>
+                                </div>
+                                <div class="w-full bg-gray-100 rounded-full h-2.5">
+                                    <div class="progress-bar bg-yellow-500 h-2.5 rounded-full" style="width: 12%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm text-gray-600">Hors service</span>
+                                    <span class="text-sm font-bold text-red-600">1</span>
+                                </div>
+                                <div class="w-full bg-gray-100 rounded-full h-2.5">
+                                    <div class="progress-bar bg-red-500 h-2.5 rounded-full" style="width: 4%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
+                        <h3 class="text-lg font-bold text-gray-800">Dernières locations</h3>
+                        <button class="text-sm text-blue-600 hover:text-blue-700 font-medium">Voir tout</button>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase">Client</th>
+                                    <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase">Véhicule</th>
+                                    <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase">Dates</th>
+                                    <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase">Montant</th>
+                                    <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase">Statut</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100">
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                                <span class="text-xs font-bold text-blue-600">AG</span>
+                                            </div>
+                                            <span class="text-sm font-medium text-gray-800">Abdellah Gueye</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-600">Ford Scape</td>
+                                    <td class="px-6 py-4 text-sm text-gray-600">10/06 - 15/06</td>
+                                    <td class="px-6 py-4 text-sm font-semibold text-gray-800">150 000 FCFA</td>
+                                    <td class="px-6 py-4">
+                                        <span class="px-3 py-1 text-xs font-medium bg-green-100 text-green-700 rounded-full">Active</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                                                <span class="text-xs font-bold text-purple-600">IB</span>
+                                            </div>
+                                            <span class="text-sm font-medium text-gray-800">Ibou Diankha</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-600">Mazda Cx9</td>
+                                    <td class="px-6 py-4 text-sm text-gray-600">08/06 - 12/06</td>
+                                    <td class="px-6 py-4 text-sm font-semibold text-gray-800">200 000 FCFA</td>
+                                    <td class="px-6 py-4">
+                                        <span class="px-3 py-1 text-xs font-medium bg-blue-100 text-blue-700 rounded-full">Terminée</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
+                                                <span class="text-xs font-bold text-orange-600">FD</span>
+                                            </div>
+                                            <span class="text-sm font-medium text-gray-800">Fatou Diop</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-600">BMW X3</td>
+                                    <td class="px-6 py-4 text-sm text-gray-600">05/06 - 20/06</td>
+                                    <td class="px-6 py-4 text-sm font-semibold text-gray-800">250 000 FCFA</td>
+                                    <td class="px-6 py-4">
+                                        <span class="px-3 py-1 text-xs font-medium bg-green-100 text-green-700 rounded-full">Active</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-8 h-8 bg-pink-100 rounded-full flex items-center justify-center">
+                                                <span class="text-xs font-bold text-pink-600">AF</span>
+                                            </div>
+                                            <span class="text-sm font-medium text-gray-800">Awa Fall</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-600">Hyunday</td>
+                                    <td class="px-6 py-4 text-sm text-gray-600">01/06 - 05/06</td>
+                                    <td class="px-6 py-4 text-sm font-semibold text-gray-800">100 000 FCFA</td>
+                                    <td class="px-6 py-4">
+                                        <span class="px-3 py-1 text-xs font-medium bg-gray-100 text-gray-700 rounded-full">Annulée</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
