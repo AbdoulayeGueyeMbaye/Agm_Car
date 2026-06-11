@@ -16,7 +16,7 @@ let usersData = [];
             a.download = JSON_FILE_NAME;
             document.body.appendChild(a);
             a.click();
-            document.body.removeChild(a);
+            a.remove();
             URL.revokeObjectURL(url);
             alert("Fichier " + JSON_FILE_NAME + " exporté avec succès !");
         }
