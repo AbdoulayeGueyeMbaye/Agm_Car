@@ -1,6 +1,25 @@
 const JSON_FILE_NAME = "agm_car_users.json";
 let usersData = []; 
 
+<<<<<<< HEAD
+=======
+        
+        function loadJsonFile() {
+            const data = localStorage.getItem(JSON_FILE_NAME);
+            if (data) {
+                try {
+                    usersData = JSON.parse(data);
+                } catch (e) {
+                    usersData = [];
+                }
+            } else {
+                usersData = [];
+            }
+            return usersData;
+        }
+
+       
+>>>>>>> 6f419597a65918895117f902e0c9cacbd5fafac2
         function saveJsonFile(data) {
             usersData = data;
             localStorage.setItem(JSON_FILE_NAME, JSON.stringify(data, null, 2));
@@ -16,11 +35,37 @@ let usersData = [];
             a.download = JSON_FILE_NAME;
             document.body.appendChild(a);
             a.click();
+<<<<<<< HEAD
             a.remove();
+=======
+            document.body.removeChild(a);
+>>>>>>> 6f419597a65918895117f902e0c9cacbd5fafac2
             URL.revokeObjectURL(url);
             alert("Fichier " + JSON_FILE_NAME + " exporté avec succès !");
         }
 
+<<<<<<< HEAD
+=======
+        
+        // function importJsonFile(file) {
+        //     const reader = new FileReader();
+        //     reader.onload = function(e) {
+        //         try {
+        //             const data = JSON.parse(e.target.result);
+        //             if (Array.isArray(data)) {
+        //                 saveJsonFile(data);
+        //                 alert("Fichier JSON importé avec succès ! " + data.length + " utilisateur(s) chargé(s).");
+        //             } else {
+        //                 alert("Format JSON invalide. Le fichier doit contenir un tableau d'utilisateurs.");
+        //             }
+        //         } catch (err) {
+        //             alert("Erreur lors de l'importation : fichier JSON invalide.");
+        //         }
+        //     };
+        //     reader.readAsText(file);
+        // }
+
+>>>>>>> 6f419597a65918895117f902e0c9cacbd5fafac2
        
         const authPage = document.getElementById("auth-page");
         const dashboardPage = document.getElementById("dashboard-page");
